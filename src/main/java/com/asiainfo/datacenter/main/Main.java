@@ -34,6 +34,5 @@ public class Main {
         oracleEntry.initConfig();
         oracleEntry.startOracleEntry();
         oracleEntry.startKafkaConsumer(bootstrap, topic, groupid, client);
-        System.out.println("dddddd");
     }
 }
