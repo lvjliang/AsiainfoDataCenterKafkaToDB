@@ -18,15 +18,15 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by 董建斌 on 2018/9/26.
  */
-public class KafkaConsumer1 {
-    private static Logger log = Logger.getLogger(KafkaConsumer1.class.getName());
+public class ConsumeKafka {
+    private static Logger log = Logger.getLogger(ConsumeKafka.class.getName());
 
     private final BlockingQueue<JSONObject> queue;
     private Properties props = null;
     private static boolean complete = false;
 
 
-    public KafkaConsumer1(BlockingQueue<JSONObject> queue) {
+    public ConsumeKafka(BlockingQueue<JSONObject> queue) {
         this.queue = queue;
     }
 
@@ -45,7 +45,7 @@ public class KafkaConsumer1 {
         props.put("value.deserializer", StringDeserializer.class.getName());
         props.put("max.poll.interval.ms", "300000");
         props.put("max.poll.records", "500");
-        props.put("auto.offset.reset", "earliest");
+        props.put("auto.offset.reset", "latest");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList(topic));
         AtomicLong atomicLong = new AtomicLong();
@@ -111,7 +111,7 @@ public class KafkaConsumer1 {
                     optSqlJson.put("sql", optSql);
                     this.queue.add(optSqlJson);
 //                    System.out.println("kafkaMsg: " + new String(kafkaMsg));
-                    System.out.println("optSql: " + optSql);
+//                    System.out.println("optSql: " + optSql);
                 } catch (Exception e) {
                     log.error("Parse to SQL ERROR : getMessage - " + new String(kafkaMsg) + "\n" + e.getMessage(), e);
                 }
@@ -125,7 +125,7 @@ public class KafkaConsumer1 {
 
     public static void main(String[] args) {
         BlockingQueue<JSONObject> queue = new LinkedBlockingQueue<JSONObject>();
-        KafkaConsumer1 kafkaConsumer = new KafkaConsumer1(queue);
+        ConsumeKafka kafkaConsumer = new ConsumeKafka(queue);
 //        kafkaConsumer.consume("master", "S3SA048:2181,S3SA049:2181,S3SA050:2181", "test-gomewallet-group-1", "finance_gome_wallet", 1);
     }
 

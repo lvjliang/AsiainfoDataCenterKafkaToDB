@@ -5,7 +5,7 @@ import com.asiainfo.datacenter.attr.ConfAttr;
 import com.asiainfo.datacenter.attr.OracleAttr;
 import com.asiainfo.datacenter.monitor.OracleSqlBufferMonitor;
 import com.asiainfo.datacenter.monitor.SaveHourCountTimer;
-import com.asiainfo.datacenter.process.KafkaConsumer1;
+import com.asiainfo.datacenter.process.ConsumeKafka;
 import com.asiainfo.datacenter.process.SaveToOracleExecutor;
 import com.asiainfo.datacenter.utils.ParseUtil;
 import com.asiainfo.datacenter.utils.PropertiesUtil;
@@ -30,7 +30,7 @@ public class OracleEntry {
     private static AtomicInteger saveToOracleSuccessCount = new AtomicInteger(0);
     private static AtomicInteger saveToOracleFailureCount = new AtomicInteger(0);
 
-    KafkaConsumer1 kafkaConsumer = null;
+    ConsumeKafka kafkaConsumer = null;
     OracleSqlBufferMonitor bufferMonitor = null;
     private Vector<SaveToOracleExecutor> consumers = new Vector<SaveToOracleExecutor>();
 
@@ -148,7 +148,7 @@ public class OracleEntry {
      */
 
     public void startKafkaConsumer(String bootstrap, String topic, String groupid, String client) {
-        this.kafkaConsumer = new KafkaConsumer1(this.oracleSqlBuffer);
+        this.kafkaConsumer = new ConsumeKafka(this.oracleSqlBuffer);
         log.info("-------------------Kafka consumer starting-------------------");
         kafkaConsumer.consume(bootstrap, topic, groupid, client);
 

@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class OracleParser {
     private static Logger log = Logger.getLogger(OracleParser.class.getName());
 
-    public static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
     private static XmlTable xml2table = new XmlTable();
     private static List<List> fieldList = new ArrayList<List>();
     private static List<List> primarykeyList = new ArrayList<List>();
@@ -81,6 +81,14 @@ public class OracleParser {
                             CbOggMessage.Column msgColumn = msgColumns.get(i);
                             String[] colVal = metaColslist.get(i).split(",");
                             String metaColName = colVal[0];
+
+                            if ("PROVINCE_CODE".equals(metaColName)) {
+//                                System.out.println("PROVINCE_CODE：" + new String(msgColumn.getCurrentValue()));
+                                if (!new String(msgColumn.getCurrentValue()).equals("97")){
+                                    return false;
+                                }
+                            }
+
                             if (msgColumn.isCurrentValueExist()) {
                                 if (msgColumn.getCurrentValue() != null) {
                                     fieldList.add(createField(i, metaColName, msgColumn.getCurrentValue()));
@@ -128,7 +136,8 @@ public class OracleParser {
             List listFiled = new ArrayList();
             listFiled.add(fieldPos);
             listFiled.add(new StringBuffer("\"").append(fieldName).append("\"").toString());
-            listFiled.add( new String(fieldValue, "GB2312").toUpperCase());
+//            listFiled.add( new String(fieldValue, "GB2312").toUpperCase());
+            listFiled.add( new String(fieldValue).toUpperCase());
             return listFiled;
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,7 +184,7 @@ public class OracleParser {
         String formatValume = "";
         if (value == null) {
             formatValume = null;
-        } else if (isMatcher("^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$", value
+        } else if (isMatcher("^[0-9]{4}-[0-9]{2}-[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2}$", value
                 .toString().trim())) {
             formatValume = formatDate(value.toString().trim());
             formatValume = "TO_DATE(" + "'" + formatValume + "'," + "'YYYY-MM-DD HH24:MI:SS')";

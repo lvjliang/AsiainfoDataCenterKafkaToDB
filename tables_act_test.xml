@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tables>
+
+<Table type="UCR_ACT2.TF_F_USER">
+	<col>PARTITION_ID,1,NUMBER</col>
+	<col>USER_ID,1,NUMBER</col>
+	<col>DUMMY_TAG,0,CHAR</col>
+	<col>NET_TYPE_CODE,0,VARCHAR2</col>
+	<col>SERIAL_NUMBER,0,VARCHAR2</col>
+	<col>EPARCHY_CODE,0,VARCHAR2</col>
+	<col>CITY_CODE,0,VARCHAR2</col>
+	<col>CUST_ID,0,NUMBER</col>
+	<col>USECUST_ID,0,NUMBER</col>
+	<col>BRAND_CODE,0,CHAR</col>
+	<col>PRODUCT_ID,0,NUMBER</col>
+	<col>USER_TYPE_CODE,0,CHAR</col>
+	<col>PREPAY_TAG,0,CHAR</col>
+	<col>SERVICE_STATE_CODE,0,VARCHAR2</col>
+	<col>OPEN_MODE,0,CHAR</col>
+	<col>ACCT_TAG,0,CHAR</col>
+	<col>REMOVE_TAG,0,CHAR</col>
+	<col>IN_DATE,0,DATE</col>
+	<col>OPEN_DATE,0,DATE</col>
+	<col>PRE_DESTROY_DATE,0,DATE</col>
+	<col>DESTROY_DATE,0,DATE</col>
+	<col>FIRST_CALL_DATE,0,DATE</col>
+	<col>LAST_STOP_DATE,0,DATE</col>
+	<col>CREDIT_CLASS,0,NUMBER</col>
+	<col>BASE_CREDIT_VALUE,0,NUMBER</col>
+	<col>CREDIT_VALUE,0,NUMBER</col>
+	<col>CREDIT_CONTROL_ID,0,NUMBER</col>
+	<col>CHANGEUSER_DATE,0,DATE</col>
+	<col>SCORE_VALUE,0,NUMBER</col>
+	<col>UPDATE_TIME,0,DATE</col>
+	<col>UPDATE_DEPART_ID,0,CHAR</col>
+	<col>UPDATE_STAFF_ID,0,VARCHAR2</col>
+	<col>USER_PASSWD,0,VARCHAR2</col>
+	<col>OPEN_DEPART_ID,0,VARCHAR2</col>
+	<col>PROVINCE_CODE,0,VARCHAR2</col>
+</Table>
+
+</Tables>

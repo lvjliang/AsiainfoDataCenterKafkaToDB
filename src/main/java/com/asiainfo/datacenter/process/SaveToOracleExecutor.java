@@ -37,13 +37,12 @@ public class SaveToOracleExecutor implements Runnable {
 
     @Override
     public void run() {
-         conn = null;
+        conn = null;
         String sql = "";
         try {
             conn = C3P0Factory.getConnection();
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
-
             while (run.get()) {
 
                 if (conn == null) {
@@ -65,8 +64,10 @@ public class SaveToOracleExecutor implements Runnable {
                     }
                     try {
                         stmt.execute(sql);
+                        System.out.println("execute sql:" + sql);
                     } catch (SQLException e) {
                         log.warn("Patch execute SQL error: " + sql + "\n" + e.getMessage());
+                        System.out.println("error sql:" + sql);
                         conn.close();
                         conn = null;
                         remedyCommit();

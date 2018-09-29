@@ -22,7 +22,6 @@ public class C3P0Factory {
 
     public static ComboPooledDataSource getOracleComboPooledDataSource() throws Exception {
         if (cpds == null) {
-
             cpds = new ComboPooledDataSource();
             String DRIVER_NAME = PropertiesUtil.getInstance().getProperty("odbc.driverClass");
             String DATABASE_URL = PropertiesUtil.getInstance().getProperty("odbc.url");
@@ -54,10 +53,10 @@ public class C3P0Factory {
         if (cpds == null) {
 
             cpds = new ComboPooledDataSource();
-            String DRIVER_NAME = PropertiesUtil.getInstance().getProperty("jdbc.driverClass");
-            String DATABASE_URL = PropertiesUtil.getInstance().getProperty("jdbc.url");
-            String DATABASE_USER = PropertiesUtil.getInstance().getProperty("jdbc.username");
-            String DATABASE_PASSWORD = PropertiesUtil.getInstance().getProperty("jdbc.password");
+            String DRIVER_NAME = PropertiesUtil.getInstance().getProperty("odbc.driverClass");
+            String DATABASE_URL = PropertiesUtil.getInstance().getProperty("odbc.url");
+            String DATABASE_USER = PropertiesUtil.getInstance().getProperty("odbc.username");
+            String DATABASE_PASSWORD = PropertiesUtil.getInstance().getProperty("odbc.password");
             boolean Validate = Boolean.parseBoolean(PropertiesUtil.getInstance().getProperty("c3p0.validate"));
             int Min_PoolSize = Integer.parseInt(PropertiesUtil.getInstance().getProperty("c3p0.minPoolSize"));
             int Acquire_Increment = Integer.parseInt(PropertiesUtil.getInstance().getProperty("c3p0.acquireIncrement"));

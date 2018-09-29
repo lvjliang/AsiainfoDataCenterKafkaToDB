@@ -55,6 +55,12 @@
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
         </dependency>
+        <!--ORACLE JDBC驱动-->
+        <dependency>
+            <groupId>com.oracle10</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.4</version>
+        </dependency>
     </dependencies>
 
     <build>

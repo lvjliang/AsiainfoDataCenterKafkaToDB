@@ -14,7 +14,6 @@ public class Main {
     public static void main(String[] args) {
         log.info("---------START-----");
 
-        //TODO 写死在程序中的配置文件，log4j
         PropertyConfigurator.configure(PropertiesUtil.getInstance().getProperty("log4j.properties"));
         //检查启动参数
         args = new String[] { "133.224.217.121:9092,133.224.217.123:9092,133.224.217.125:9092", "DBAct2", "group1", "consumer1" };
