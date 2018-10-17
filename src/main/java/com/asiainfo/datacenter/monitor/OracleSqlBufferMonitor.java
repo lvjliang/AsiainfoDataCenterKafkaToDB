@@ -14,8 +14,9 @@ import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Created by lujia on 2015/5/26.
+ * Created by 董建斌 on 2018/9/26.
  */
+
 public class OracleSqlBufferMonitor extends TimerTask {
     private static Logger log = Logger.getLogger(OracleSqlBufferMonitor.class);
 

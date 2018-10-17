@@ -1,5 +1,9 @@
 package com.asiainfo.datacenter.mail;
 
+/**
+ * Created by 董建斌 on 2018/9/26.
+ */
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

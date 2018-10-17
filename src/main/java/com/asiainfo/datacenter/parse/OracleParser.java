@@ -36,6 +36,22 @@ public class OracleParser {
             ArrayList<String> metaKeylist = xml2table.getAllKeyPos(configTableName);
             if (metaColslist != null && metaKeylist != null && metaColslist.size() > 0 && metaKeylist.size() > 0 ) {
                 List<CbOggMessage.Column> msgColumns = oggMsg.getColumns();
+
+//                for (int i = 0;i < msgColumns.size();i++) {
+//                    CbOggMessage.Column msgColumn = msgColumns.get(i);
+//                    int keypos = msgColumn.getIndex();
+//                    String[] colVal = metaColslist.get(keypos).split(",");
+//                    String metaColName = colVal[0];
+//
+//                    if ("PROVINCE_CODE".equals(metaColName)) {
+//                        System.out.println("dongjb come here metaColName " + metaColName + ":" + msgColumn.getCurrentValue());
+//                        if (!msgColumn.getCurrentValue() == null)
+//                        if (!new String(msgColumn.getCurrentValue()).equals("97")) {
+//                            return false;
+//                        }
+//                    }
+//                }
+
                 switch (oggMsg.getOperate()) {
                     case Update:
                     case Key:
@@ -44,6 +60,7 @@ public class OracleParser {
                             int keypos= msgColumn.getIndex();
                             String[] colVal = metaColslist.get(keypos).split(",");
                             String metaColName = colVal[0];
+
                             if(metaKeylist.contains(String.valueOf(keypos))){
                                 if (msgColumn.isOldValueExist()) {
                                     if (msgColumn.getOldValue() != null) {
@@ -82,13 +99,6 @@ public class OracleParser {
                             String[] colVal = metaColslist.get(i).split(",");
                             String metaColName = colVal[0];
 
-                            if ("PROVINCE_CODE".equals(metaColName)) {
-//                                System.out.println("PROVINCE_CODE：" + new String(msgColumn.getCurrentValue()));
-                                if (!new String(msgColumn.getCurrentValue()).equals("97")){
-                                    return false;
-                                }
-                            }
-
                             if (msgColumn.isCurrentValueExist()) {
                                 if (msgColumn.getCurrentValue() != null) {
                                     fieldList.add(createField(i, metaColName, msgColumn.getCurrentValue()));
@@ -106,6 +116,7 @@ public class OracleParser {
                             int keypos = msgColumn.getIndex();
                             String[] colVal = metaColslist.get(keypos).split(",");
                             String metaColName = colVal[0];
+
                             if (metaKeylist.contains(String.valueOf(keypos))) {
                                 if (msgColumn.isOldValueExist()) {
                                     if (msgColumn.getOldValue() != null) {
@@ -136,8 +147,7 @@ public class OracleParser {
             List listFiled = new ArrayList();
             listFiled.add(fieldPos);
             listFiled.add(new StringBuffer("\"").append(fieldName).append("\"").toString());
-//            listFiled.add( new String(fieldValue, "GB2312").toUpperCase());
-            listFiled.add( new String(fieldValue).toUpperCase());
+            listFiled.add( new String(fieldValue,"GB2312").toUpperCase());
             return listFiled;
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,8 +197,7 @@ public class OracleParser {
         } else if (isMatcher("^[0-9]{4}-[0-9]{2}-[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2}$", value
                 .toString().trim())) {
             formatValume = formatDate(value.toString().trim());
-            formatValume = "TO_DATE(" + "'" + formatValume + "'," + "'YYYY-MM-DD HH24:MI:SS')";
-
+            formatValume = "TO_DATE(" + "'" + formatValume + "'," + "'YYYY-MM-DD:HH24:MI:SS')";
         } else if (value.toString().contains("'")) {
             formatValume = "'" + value.toString().replace("'", "''") + "'";
         } else {
@@ -280,9 +289,9 @@ public class OracleParser {
         for (int i = 0; i < primarykeyList.size(); i++) {
             List list = (List) primarykeyList.get(i);
             if (primarykeyList.size() != i + 1) {
-                primaryKeyPart = primaryKeyPart + list.get(1) + "='" + list.get(2) + "' AND ";
+                primaryKeyPart = primaryKeyPart + list.get(1) + "=" + valueFormat(list.get(2)) + " AND ";
             } else {
-                primaryKeyPart = primaryKeyPart + list.get(1) + "='" + list.get(2) + "'";
+                primaryKeyPart = primaryKeyPart + list.get(1) + "=" + valueFormat(list.get(2)) + "";
             }
         }
 

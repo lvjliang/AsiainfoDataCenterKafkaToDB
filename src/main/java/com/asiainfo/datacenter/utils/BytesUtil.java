@@ -2,7 +2,9 @@ package com.asiainfo.datacenter.utils;
 
 import java.util.LinkedList;
 import java.util.List;
-
+/**
+ * Created by 董建斌 on 2018/9/26.
+ */
 public class BytesUtil {
 	public final static byte LF = 10; // \n
 	public final static byte DOUBLE_QUOTE = 34; // "

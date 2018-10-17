@@ -44,7 +44,7 @@ public class OracleAttr {
     /**
      * 一次commit到Oracle的条数
      */
-    public static int ORACLE_BATCH_NUM = 1000;
+    public static int ORACLE_BATCH_NUM = 2000;
 
     /**
      * 写入Oracle的线程数

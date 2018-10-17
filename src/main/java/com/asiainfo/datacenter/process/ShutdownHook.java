@@ -4,7 +4,7 @@ import com.asiainfo.datacenter.main.OracleEntry;
 import org.apache.log4j.Logger;
 
 /**
- * Created by lujia on 2015/4/2.
+ * Created by 董建斌 on 2018/9/26.
  */
 public class ShutdownHook {
     private static Logger log = Logger.getLogger(ShutdownHook.class.getName());

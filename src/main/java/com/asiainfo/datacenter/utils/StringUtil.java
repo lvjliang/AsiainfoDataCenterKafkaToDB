@@ -22,7 +22,7 @@ import java.util.*;
  * @Title: StringUtil.java
  * @Package service
  * @Description: TODO
- * @date 2014年9月11日 下午2:32:43
+ * @date on 2018/9/26.
  */
 public class StringUtil {
     private static Logger log = Logger.getLogger(StringUtil.class.getName());

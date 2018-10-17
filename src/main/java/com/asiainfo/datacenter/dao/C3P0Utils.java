@@ -1,5 +1,9 @@
 package com.asiainfo.datacenter.dao;
 
+/**
+ * Created by 董建斌 on 2018/9/26.
+ */
+
 import com.asiainfo.datacenter.utils.PropertiesUtil;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.log4j.Logger;

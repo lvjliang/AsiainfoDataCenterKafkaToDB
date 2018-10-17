@@ -13,7 +13,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-
+/**
+ * Created by 董建斌 on 2018/9/26.
+ */
 public class XmlTable {
 
     private final static String xmlFile = OracleAttr.ORACLE_TABLES_META;

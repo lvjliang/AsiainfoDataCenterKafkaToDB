@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tables>
+
+	<Table type="UCR_CRM2.TF_F_USER">
+		<col>PARTITION_ID,1,NUMBER</col>
+		<col>USER_ID,1,NUMBER</col>
+		<col>CUST_ID,0,NUMBER</col>
+		<col>USECUST_ID,0,NUMBER</col>
+		<col>BRAND_CODE,0,CHAR</col>
+		<col>PRODUCT_ID,0,NUMBER</col>
+		<col>EPARCHY_CODE,0,VARCHAR2</col>
+		<col>CITY_CODE,0,VARCHAR2</col>
+		<col>USER_PASSWD,0,VARCHAR2</col>
+		<col>USER_DIFF_CODE,0,VARCHAR2</col>
+		<col>USER_TYPE_CODE,0,CHAR</col>
+		<col>SERIAL_NUMBER,0,VARCHAR2</col>
+		<col>NET_TYPE_CODE,0,VARCHAR2</col>
+		<col>SCORE_VALUE,0,NUMBER</col>
+		<col>CREDIT_CLASS,0,NUMBER</col>
+		<col>BASIC_CREDIT_VALUE,0,NUMBER</col>
+		<col>CREDIT_VALUE,0,NUMBER</col>
+		<col>ACCT_TAG,0,CHAR</col>
+		<col>PREPAY_TAG,0,CHAR</col>
+		<col>IN_DATE,0,DATE</col>
+		<col>OPEN_DATE,0,DATE</col>
+		<col>OPEN_MODE,0,CHAR</col>
+		<col>OPEN_DEPART_ID,0,VARCHAR2</col>
+		<col>OPEN_STAFF_ID,0,VARCHAR2</col>
+		<col>IN_DEPART_ID,0,VARCHAR2</col>
+		<col>IN_STAFF_ID,0,VARCHAR2</col>
+		<col>REMOVE_TAG,0,CHAR</col>
+		<col>DESTROY_TIME,0,DATE</col>
+		<col>REMOVE_EPARCHY_CODE,0,VARCHAR2</col>
+		<col>REMOVE_CITY_CODE,0,VARCHAR2</col>
+		<col>REMOVE_DEPART_ID,0,VARCHAR2</col>
+		<col>REMOVE_REASON_CODE,0,VARCHAR2</col>
+		<col>PRE_DESTROY_TIME,0,DATE</col>
+		<col>FIRST_CALL_TIME,0,DATE</col>
+		<col>LAST_STOP_TIME,0,DATE</col>
+		<col>USER_STATE_CODESET,0,VARCHAR2</col>
+		<col>MPUTE_MONTH_FEE,0,CHAR</col>
+		<col>MPUTE_DATE,0,DATE</col>
+		<col>UPDATE_TIME,0,DATE</col>
+		<col>ASSURE_CUST_ID,0,NUMBER</col>
+		<col>ASSURE_TYPE_CODE,0,CHAR</col>
+		<col>ASSURE_DATE,0,DATE</col>
+		<col>DEVELOP_STAFF_ID,0,VARCHAR2</col>
+		<col>DEVELOP_DATE,0,DATE</col>
+		<col>DEVELOP_EPARCHY_CODE,0,VARCHAR2</col>
+		<col>DEVELOP_CITY_CODE,0,VARCHAR2</col>
+		<col>DEVELOP_DEPART_ID,0,VARCHAR2</col>
+		<col>DEVELOP_NO,0,VARCHAR2</col>
+		<col>REMARK,0,VARCHAR2</col>
+		<col>CREDIT_RULE_ID,0,NUMBER</col>
+		<col>CONTRACT_ID,0,VARCHAR2</col>
+		<col>CHANGEUSER_DATE,0,DATE</col>
+		<col>IN_NET_MODE,0,VARCHAR2</col>
+		<col>PRODUCT_TYPE_CODE,0,VARCHAR2</col>
+		<col>MAIN_DISCNT_CODE,0,NUMBER</col>
+		<col>PRODUCT_SPEC,0,VARCHAR2</col>
+		<col>PROVINCE_CODE,0,VARCHAR2</col>
+	</Table>
+
+	<Table type="UCR_ACT2.TS_B_BILL">
+		<col>EPARCHY_CODE,1,VARCHAR2</col>
+		<col>NET_TYPE_CODE,1,VARCHAR2</col>
+		<col>SERIAL_NUMBER,1,VARCHAR2</col>
+		<col>BILL_ID,1,NUMBER</col>
+		<col>ACCT_ID,1,NUMBER</col>
+		<col>USER_ID,1,NUMBER</col>
+		<col>PARTITION_ID,1,NUMBER</col>
+		<col>CYCLE_ID,1,NUMBER</col>
+		<col>INTEGRATE_ITEM_CODE,1,NUMBER</col>
+		<col>FEE,1,NUMBER</col>
+		<col>BALANCE,1,NUMBER</col>
+		<col>PRINT_FEE,1,NUMBER</col>
+		<col>B_DISCNT,1,NUMBER</col>
+		<col>A_DISCNT,1,NUMBER</col>
+		<col>ADJUST_BEFORE,1,NUMBER</col>
+		<col>ADJUST_AFTER,1,NUMBER</col>
+		<col>LATE_FEE,1,NUMBER</col>
+		<col>LATE_BALANCE,1,NUMBER</col>
+		<col>LATECAL_DATE,1,DATE</col>
+		<col>CANPAY_TAG,1,CHAR</col>
+		<col>PAY_TAG,1,CHAR</col>
+		<col>BILL_PAY_TAG,1,CHAR</col>
+		<col>VERSION_NO,1,NUMBER</col>
+		<col>UPDATE_TIME,1,DATE</col>
+		<col>UPDATE_DEPART_ID,1,VARCHAR2</col>
+		<col>UPDATE_STAFF_ID,1,VARCHAR2</col>
+		<col>CHARGE_ID,1,NUMBER</col>
+		<col>WRITEOFF_FEE1,1,NUMBER</col>
+		<col>WRITEOFF_FEE2,1,NUMBER</col>
+		<col>WRITEOFF_FEE3,1,NUMBER</col>
+		<col>RSRV_FEE1,1,NUMBER</col>
+		<col>RSRV_FEE2,1,NUMBER</col>
+		<col>RSRV_FEE3,1,NUMBER</col>
+		<col>RSRV_INFO1,1,VARCHAR2</col>
+		<col>RSRV_INFO2,1,VARCHAR2</col>
+		<col>DESC_OWE_TAG,1,CHAR</col>
+		<col>BACKUP_INFO,1,VARCHAR2</col>
+		<col>ROLL_BACK_INFO,1,VARCHAR2</col>
+		<col>CITY_CODE,1,VARCHAR2</col>
+		<col>PROVINCE_CODE,1,VARCHAR2</col>
+	</Table>
+
+
+
+</Tables>

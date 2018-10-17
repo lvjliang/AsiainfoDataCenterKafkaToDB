@@ -13,8 +13,8 @@ import java.util.Map;
 /**
  * 
  * 配置文件properties自动加载类
- * @author lujia
- * @version 2012-6-5
+ * @author 董建斌
+ * @version on 2018/9/26.
  * @see PropertiesUtil
  * @since
  */
@@ -41,8 +41,8 @@ public class PropertiesUtil
     private static boolean autoSave = true;
 
     //TODO 写死在程序中的配置文件，配置文件
-    private final static String propertiesFile = "config.properties";
-//    private final static String propertiesFile = "conf/config.properties";
+//    private final static String propertiesFile = "config.properties";
+    private final static String propertiesFile = "conf/config.properties";
 
     /**
      * properties文件路径

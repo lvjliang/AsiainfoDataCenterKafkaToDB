@@ -151,7 +151,6 @@ public class OracleEntry {
         this.kafkaConsumer = new ConsumeKafka(this.oracleSqlBuffer);
         log.info("-------------------Kafka consumer starting-------------------");
         kafkaConsumer.consume(bootstrap, topic, groupid, client);
-
     }
 
     /**
@@ -169,6 +168,5 @@ public class OracleEntry {
             executor.stop();
         }
 //        kafkaConsumer.complete =true ;
-
     }
 }

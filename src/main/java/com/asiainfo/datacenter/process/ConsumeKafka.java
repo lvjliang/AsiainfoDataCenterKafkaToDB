@@ -2,14 +2,17 @@ package com.asiainfo.datacenter.process;
 
 import com.alibaba.fastjson.JSONObject;
 import com.asiainfo.datacenter.attr.OracleAttr;
+import com.asiainfo.datacenter.attr.SaslConfig;
 import com.asiainfo.datacenter.parse.CbOggMessage;
 import com.asiainfo.datacenter.parse.OracleParser;
 import com.asiainfo.datacenter.main.OracleEntry;
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.apache.log4j.Logger;
 
+import javax.security.auth.login.Configuration;
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -41,25 +44,36 @@ public class ConsumeKafka {
         props.put("bootstrap.servers", bootstrap);
         props.put("group.id", groupid);
         props.put("enable.auto.commit", "false");
-        props.put("key.deserializer", StringDeserializer.class.getName());
-        props.put("value.deserializer", StringDeserializer.class.getName());
+        props.put("key.deserializer", ByteArrayDeserializer.class.getName());
+        props.put("value.deserializer", ByteArrayDeserializer.class.getName());
         props.put("max.poll.interval.ms", "300000");
-        props.put("max.poll.records", "500");
+        props.put("max.poll.records", "100000");
         props.put("auto.offset.reset", "latest");
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
+        props.put("sasl.mechanism", "PLAIN");
+        Configuration.setConfiguration(new SaslConfig());
+        KafkaConsumer<byte[], byte[]> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList(topic));
         AtomicLong atomicLong = new AtomicLong();
         while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(100);
-            records.forEach(record -> {
-//                System.out.printf("client : %s , topic: %s , partition: %d , offset = %d, key = %s, value = %s%n",
-//                        client, record.topic(), record.partition(), record.offset(), record.key(), record.value());
-                byte[] kafkaMsg = record.value().getBytes();
-                parseMsg(kafkaMsg);
-            });
-            consumer.commitSync();
-        }
+            try {
+                ConsumerRecords<byte[], byte[]> records = consumer.poll(10000);
+                records.forEach(record -> {
+//                    System.out.printf("client : %s , topic: %s , partition: %d , offset = %d, key = %s, value = %s%n",
+//                            client, record.topic(), record.partition(), record.offset(), record.key(), new String(record.value()));
 
+                    byte[] kafkaMsg = new byte[0];
+                    kafkaMsg = record.value();
+
+                    parseMsg(kafkaMsg);
+                });
+//                consumer.commitSync();
+                consumer.commitAsync();
+            }catch (Exception e)
+            {
+                System.out.println("kafka_Exception---------->>" + e);
+            }
+        }
     }
 
     private void parseMsg(byte[] kafkaMsg) {
@@ -118,8 +132,8 @@ public class ConsumeKafka {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("====================ExceptionMessage:"+e.getMessage());
-            System.out.println("====================ExceptionData: " + new String(kafkaMsg));
+//            System.out.println("====================ExceptionMessage:"+e.getMessage());
+//            System.out.println("====================ExceptionData: " + new String(kafkaMsg));
         }
     }
 

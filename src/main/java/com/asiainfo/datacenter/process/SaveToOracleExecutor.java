@@ -16,7 +16,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Created by lujia on 2015/5/25.
+ * Created by 董建斌 on 2018/9/26.
  */
 public class SaveToOracleExecutor implements Runnable {
 
@@ -64,7 +64,7 @@ public class SaveToOracleExecutor implements Runnable {
                     }
                     try {
                         stmt.execute(sql);
-                        System.out.println("execute sql:" + sql);
+//                        System.out.println("execute sql:" + sql);
                     } catch (SQLException e) {
                         log.warn("Patch execute SQL error: " + sql + "\n" + e.getMessage());
                         System.out.println("error sql:" + sql);

@@ -117,6 +117,7 @@ public class CbOggMessage {
 			this.oldValueExist = oldValueExist;
 		}
 
+
 	}
 
 	public static final SimpleDateFormat YMD_HMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -165,6 +166,16 @@ public class CbOggMessage {
 	 * 该操作在事务中的状态/位置
 	 */
 	private OperateState opState;
+
+	/**
+	 * 重建事务ID
+	 */
+	private byte[] reBiuldTransactionId;
+
+	/**
+	 * 前操作在事务中的位置
+	 */
+	private byte[] posInTransaction;
 
 	/**
 	 *
@@ -222,7 +233,7 @@ public class CbOggMessage {
 			throw new Exception(String.format("message parts only has %s, less %s", parts.size(), MIN_FIRST_PARTS));
 		}
 		long scn = 0;
-		List<byte[]> partA0 = splitAndCheck(parts, 0, SECOND_SEPERATOR, 5);
+		List<byte[]> partA0 = splitAndCheck(parts, 0, SECOND_SEPERATOR, 7);
 		List<byte[]> partA1 = BytesUtil.splitList(parts.get(1), (byte)'.', 0);
 
 		if(parts.get(2) == null || parts.get(2).length == 0) {
@@ -273,6 +284,8 @@ public class CbOggMessage {
 		aOgg.setOggTransactionId(partA0.get(2));
 		aOgg.setLocalTransactionId(partA0.get(3));
 		aOgg.setOpState(opState);
+		aOgg.setReBiuldTransactionId(partA0.get(5));
+		aOgg.setPosInTransaction(partA0.get(6));
 
 		//第二项
 		if(partA1.size() == 2) {
@@ -442,6 +455,18 @@ public class CbOggMessage {
 
 	public void setOpState(OperateState opState) {
 		this.opState = opState;
+	}
+
+	public byte[] getReBiuldTransactionId() { return reBiuldTransactionId; }
+
+	public void setReBiuldTransactionId(byte[] reBiuldTransactionId) {
+		this.reBiuldTransactionId = reBiuldTransactionId;
+	}
+
+	public byte[] getPosInTransaction() { return posInTransaction; }
+
+	public void setPosInTransaction(byte[] posInTransaction) {
+		this.posInTransaction = posInTransaction;
 	}
 
 	public byte[] getCatalogName() {

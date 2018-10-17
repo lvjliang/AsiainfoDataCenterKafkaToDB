@@ -1,7 +1,7 @@
 package com.asiainfo.datacenter.attr;
 
 /**
- * Created by lujia on 2015/5/22.
+ * Created by 董建斌 on 2018/9/26.
  */
 public class ConfAttr {
 
