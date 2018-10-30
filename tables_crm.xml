@@ -1842,7 +1842,7 @@
 	<col>PROVINCE_CODE,0,VARCHAR2</col>
 </Table> 
 
-<Table type="UCR_CRM2.TF_B_TRADE_PRODUCT">
+<Table type="UCR_CRM2.TF_B_TRADE_SVCSTATE">
 <col>TRADE_ID,1,NUMBER</col>
 <col>ACCEPT_MONTH,1,NUMBER</col>
 <col>USER_ID,0,NUMBER</col>

@@ -2,6 +2,7 @@ package com.asiainfo.datacenter.parse;
 
 import com.asiainfo.datacenter.utils.XmlTable;
 import org.apache.commons.lang.StringUtils;
+import org.apache.kafka.common.protocol.types.Field;
 import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
@@ -31,26 +32,47 @@ public class OracleParser {
         try {
             fieldList = new ArrayList<List>();
             primarykeyList = new ArrayList<List>();
-            String configTableName = new String(oggMsg.getSchemeName())+"."+new String(oggMsg.getTableName());
+            String configTableName = new String(oggMsg.getSchemeName()) + "." + new String(oggMsg.getTableName());
             ArrayList<String> metaColslist = xml2table.getAllCol(configTableName);
             ArrayList<String> metaKeylist = xml2table.getAllKeyPos(configTableName);
             if (metaColslist != null && metaKeylist != null && metaColslist.size() > 0 && metaKeylist.size() > 0 ) {
                 List<CbOggMessage.Column> msgColumns = oggMsg.getColumns();
 
-//                for (int i = 0;i < msgColumns.size();i++) {
-//                    CbOggMessage.Column msgColumn = msgColumns.get(i);
-//                    int keypos = msgColumn.getIndex();
-//                    String[] colVal = metaColslist.get(keypos).split(",");
-//                    String metaColName = colVal[0];
-//
-//                    if ("PROVINCE_CODE".equals(metaColName)) {
-//                        System.out.println("dongjb come here metaColName " + metaColName + ":" + msgColumn.getCurrentValue());
-//                        if (!msgColumn.getCurrentValue() == null)
-//                        if (!new String(msgColumn.getCurrentValue()).equals("97")) {
-//                            return false;
-//                        }
-//                    }
-//                }
+                for (int i = 0;i < msgColumns.size();i++) {
+                    CbOggMessage.Column msgColumn = msgColumns.get(i);
+                    int keypos = msgColumn.getIndex();
+
+                    String msgColumnCurrentValue = null;
+                    if (msgColumn.getCurrentValue() != null ) {
+                        msgColumnCurrentValue  = new String(msgColumn.getCurrentValue());
+                    }
+                    String msgColumnOldValue = null;
+                    if (msgColumn.getOldValue() != null ) {
+                        msgColumnOldValue = new String(msgColumn.getOldValue());
+                    }
+
+                    String[] colVal = metaColslist.get(keypos).split(",");
+                    String metaColName = colVal[0];
+
+                    if ("PROVINCE_CODE".equals(metaColName)) {
+                        if (msgColumnCurrentValue != null && !msgColumnCurrentValue.equals("97")) {
+                            return false;
+                        }
+                        if (msgColumnOldValue != null && !msgColumnOldValue.equals("97")) {
+                            return false;
+                        }
+                    }
+                    if ("USER_ID".equals(metaColName)) {
+                        if (msgColumnCurrentValue != null && msgColumnCurrentValue.length() > 2 && Integer.parseInt(msgColumnCurrentValue.substring(0,2)) < 97 ) {
+                            return false;
+                        }
+                        if (msgColumnOldValue != null && msgColumnOldValue.length() > 2 && Integer.parseInt(msgColumnOldValue.substring(0,2)) < 97) {
+                            return false;
+                        }
+                    }
+
+
+                }
 
                 switch (oggMsg.getOperate()) {
                     case Update:
@@ -136,6 +158,7 @@ public class OracleParser {
                 return true;
             }
         } catch (Exception e) {
+            System.out.println("TableName: " + new String(oggMsg.getTableName()));
             e.printStackTrace();
             return false;
         }

@@ -57,7 +57,7 @@ public class ConsumeKafka {
         AtomicLong atomicLong = new AtomicLong();
         while (true) {
             try {
-                ConsumerRecords<byte[], byte[]> records = consumer.poll(10000);
+                ConsumerRecords<byte[], byte[]> records = consumer.poll(5000);
                 records.forEach(record -> {
 //                    System.out.printf("client : %s , topic: %s , partition: %d , offset = %d, key = %s, value = %s%n",
 //                            client, record.topic(), record.partition(), record.offset(), record.key(), new String(record.value()));
@@ -92,27 +92,43 @@ public class ConsumeKafka {
             String optType =  new String(oggMsg.getOperate().name()).toUpperCase();
             String optTable = new String(oggMsg.getTableName());
             String optOwner = new String(oggMsg.getSchemeName());
-            if (OracleAttr.CHANGE_OWNER != null) {
-                optOwner = OracleAttr.CHANGE_OWNER;
+//            if (OracleAttr.CHANGE_OWNER != null) {
+//                optOwner = OracleAttr.CHANGE_OWNER;
+//            }
+            StringBuilder optTableBuilder = new StringBuilder();
+            switch (optOwner) {
+                case "UCR_CRM2":
+                    optTableBuilder = new StringBuilder("CB_UCR_CRM2.");
+                    break;
+                case "UCR_CEN1":
+                    optTableBuilder = new StringBuilder("CB_UCR_CEN1.");
+                    break;
+                case "UCR_ACT2":
+                    optTableBuilder = new StringBuilder("CB_UCR_ACT2.");
+                    break;
+                case "UCR_PARAM":
+                    optTableBuilder = new StringBuilder("CB_UCR_PARAM.");
+                    break;
             }
             String optSql = "";
 
             if (OracleParser.checkTable(oggMsg)) {
                 try {
-                    StringBuilder optTableBuilder = new StringBuilder(optOwner);
+//                    StringBuilder optTableBuilder = new StringBuilder(optOwner);
+                    optTableBuilder.append(optTable);
                     List<List> filedList = OracleParser.getFiledList();
                     List<List> primarykeyList = OracleParser.getPrimaryKeyList();
 
                     switch (oggMsg.getOperate()) {
                         case Update:
                         case Key:
-                            optSql = OracleParser.jsonToUpdateOrUpdatePkSql(filedList, primarykeyList, optTable);
+                            optSql = OracleParser.jsonToUpdateOrUpdatePkSql(filedList, primarykeyList, optTableBuilder.toString());
                             break;
                         case Insert:
-                            optSql = OracleParser.jsonToInsertSql(filedList, optTable);
+                            optSql = OracleParser.jsonToInsertSql(filedList, optTableBuilder.toString());
                             break;
                         case Delete:
-                            optSql = OracleParser.jsonToDeleteSql(primarykeyList, optTable);
+                            optSql = OracleParser.jsonToDeleteSql(primarykeyList, optTableBuilder.toString());
                             break;
                         default:
                             log.error("Unaccepted operation:\n" + new String(kafkaMsg));
