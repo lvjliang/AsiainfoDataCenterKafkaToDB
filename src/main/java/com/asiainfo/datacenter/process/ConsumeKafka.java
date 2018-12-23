@@ -6,10 +6,12 @@ import com.asiainfo.datacenter.attr.SaslConfig;
 import com.asiainfo.datacenter.parse.CbOggMessage;
 import com.asiainfo.datacenter.parse.OracleParser;
 import com.asiainfo.datacenter.main.OracleEntry;
+import com.asiainfo.datacenter.utils.PropertiesUtil;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.log4j.Logger;
 
 import javax.security.auth.login.Configuration;
@@ -46,28 +48,31 @@ public class ConsumeKafka {
         props.put("enable.auto.commit", "false");
         props.put("key.deserializer", ByteArrayDeserializer.class.getName());
         props.put("value.deserializer", ByteArrayDeserializer.class.getName());
+//        props.put("key.deserializer", StringDeserializer.class.getName());
+//        props.put("value.deserializer", StringDeserializer.class.getName());
         props.put("max.poll.interval.ms", "300000");
         props.put("max.poll.records", "100000");
         props.put("auto.offset.reset", "latest");
         props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
         props.put("sasl.mechanism", "PLAIN");
-        Configuration.setConfiguration(new SaslConfig());
+        String appKey = PropertiesUtil.getInstance().getProperty("sasl.appkey");
+        String secretKey = PropertiesUtil.getInstance().getProperty("sasl.secretkey");
+        Configuration.setConfiguration(new SaslConfig(appKey,secretKey));
         KafkaConsumer<byte[], byte[]> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList(topic));
         AtomicLong atomicLong = new AtomicLong();
         while (true) {
             try {
-                ConsumerRecords<byte[], byte[]> records = consumer.poll(5000);
+                ConsumerRecords<byte[], byte[]> records = consumer.poll(50000);
                 records.forEach(record -> {
 //                    System.out.printf("client : %s , topic: %s , partition: %d , offset = %d, key = %s, value = %s%n",
-//                            client, record.topic(), record.partition(), record.offset(), record.key(), new String(record.value()));
+//                            client, record.topic(), record.partition(), record.offset(), record.key(), record.value());
 
                     byte[] kafkaMsg = new byte[0];
                     kafkaMsg = record.value();
 
                     parseMsg(kafkaMsg);
                 });
-//                consumer.commitSync();
                 consumer.commitAsync();
             }catch (Exception e)
             {
@@ -92,24 +97,27 @@ public class ConsumeKafka {
             String optType =  new String(oggMsg.getOperate().name()).toUpperCase();
             String optTable = new String(oggMsg.getTableName());
             String optOwner = new String(oggMsg.getSchemeName());
-//            if (OracleAttr.CHANGE_OWNER != null) {
-//                optOwner = OracleAttr.CHANGE_OWNER;
-//            }
-            StringBuilder optTableBuilder = new StringBuilder();
-            switch (optOwner) {
-                case "UCR_CRM2":
-                    optTableBuilder = new StringBuilder("CB_UCR_CRM2.");
-                    break;
-                case "UCR_CEN1":
-                    optTableBuilder = new StringBuilder("CB_UCR_CEN1.");
-                    break;
-                case "UCR_ACT2":
-                    optTableBuilder = new StringBuilder("CB_UCR_ACT2.");
-                    break;
-                case "UCR_PARAM":
-                    optTableBuilder = new StringBuilder("CB_UCR_PARAM.");
-                    break;
+            if (OracleAttr.CHANGE_OWNER != null) {
+                optOwner = OracleAttr.CHANGE_OWNER.get(optOwner);
             }
+            StringBuilder optTableBuilder = new StringBuilder();
+            optTableBuilder = new StringBuilder(optOwner + ".");
+
+//            StringBuilder optTableBuilder = new StringBuilder();
+//            switch (optOwner) {
+//                case "UCR_CRM2":
+//                    optTableBuilder = new StringBuilder("CB_UCR_CRM2.");
+//                    break;
+//                case "UCR_CEN1":
+//                    optTableBuilder = new StringBuilder("CB_UCR_CEN1.");
+//                    break;
+//                case "UCR_ACT2":
+//                    optTableBuilder = new StringBuilder("CB_UCR_ACT2.");
+//                    break;
+//                case "UCR_PARAM":
+//                    optTableBuilder = new StringBuilder("CB_UCR_PARAM.");
+//                    break;
+//            }
             String optSql = "";
 
             if (OracleParser.checkTable(oggMsg)) {

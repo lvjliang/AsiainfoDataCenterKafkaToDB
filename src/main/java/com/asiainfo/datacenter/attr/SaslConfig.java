@@ -12,10 +12,18 @@ import java.util.Map;
  * @create: on 2018/9/26.
  **/
 public class SaslConfig extends Configuration {
+    private String appKey;    //登陆认证用户名
+    private String secretKey; //登陆认证密码
+
+    public SaslConfig(String appKey, String secretKey) {
+        this.appKey = appKey;
+        this.secretKey = secretKey;
+    }
+
     @Override
     public AppConfigurationEntry[] getAppConfigurationEntry(String name) {
-        String appKey = "97-xinxihua-01";    //登陆认证用户名
-        String secretKey = "DZ4acLWYz"; //登陆认证密码
+        System.out.println(appKey);
+        System.out.println(secretKey);
         Map<String, String> options = new HashMap<String, String>();
         options.put("username", appKey);
         options.put("password", secretKey);

@@ -51,7 +51,8 @@ public class SaveToOracleExecutor implements Runnable {
                     stmt = conn.createStatement();
                 }
 
-                if (queue.remainingCapacity() <= 0) {
+//                if (queue.remainingCapacity() <= 0) {
+                if (queue.size() <= 0) {
                     continue;
 
                 } else {
@@ -64,7 +65,6 @@ public class SaveToOracleExecutor implements Runnable {
                     }
                     try {
                         stmt.execute(sql);
-//                        System.out.println("execute sql:" + sql);
                     } catch (SQLException e) {
                         log.warn("Patch execute SQL error: " + sql + "\n" + e.getMessage());
                         System.out.println("error sql:" + sql);

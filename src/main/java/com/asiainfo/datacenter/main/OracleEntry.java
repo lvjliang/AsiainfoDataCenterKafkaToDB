@@ -86,14 +86,18 @@ public class OracleEntry {
         if (changeOwner == null || StringUtil.isEmpty(changeOwner, true)) {
             OracleAttr.CHANGE_OWNER = null;
         } else {
-            OracleAttr.CHANGE_OWNER = changeOwner;
+            String[] firstStr = changeOwner.split("-");
+            for (int i = 0 ; i <firstStr.length ; i++ ) {
+                String[] secondStr = firstStr[i].split(":");
+                OracleAttr.CHANGE_OWNER.put(secondStr[0],secondStr[1]);
+            }
+            System.out.println(OracleAttr.CHANGE_OWNER);
         }
 
         OracleAttr.ORACLE_BATCH_NUM = Integer.parseInt(PropertiesUtil.getInstance().getProperty("toOracle_batch_size"));
         OracleAttr.TO_ORACLE_THREAD_NUM = Integer.parseInt(PropertiesUtil.getInstance().getProperty("toOracle_thread"));
 
         OracleAttr.ORACLE_TABLES_META = PropertiesUtil.getInstance().getProperty("xml.tables");
-
     }
 
     /**

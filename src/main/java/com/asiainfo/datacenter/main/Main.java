@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         log.info("---------START-----");
 
-        PropertyConfigurator.configure(PropertiesUtil.getInstance().getProperty("log4j.properties"));
+//        PropertyConfigurator.configure(PropertiesUtil.getInstance().getProperty("log4j.properties"));
         //检查启动参数
 //        args = new String[] { "133.224.217.121:9092,133.224.217.123:9092,133.224.217.125:9092", "DBCrm2", "group2", "consumer1" };
 //        args = new String[] { "10.161.11.207:7667,10.161.11.208:7667,10.161.11.209:7667", "DBCrm2_97", "97-xinxihua-01-group-01", "consumer1" };

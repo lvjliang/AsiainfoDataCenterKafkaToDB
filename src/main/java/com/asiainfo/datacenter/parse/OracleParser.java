@@ -170,7 +170,8 @@ public class OracleParser {
             List listFiled = new ArrayList();
             listFiled.add(fieldPos);
             listFiled.add(new StringBuffer("\"").append(fieldName).append("\"").toString());
-            listFiled.add( new String(fieldValue,"GB2312").toUpperCase());
+//            listFiled.add( new String(fieldValue,"GB2312").toUpperCase());
+            listFiled.add( new String(fieldValue,"GB2312"));
             return listFiled;
         } catch (Exception e) {
             e.printStackTrace();

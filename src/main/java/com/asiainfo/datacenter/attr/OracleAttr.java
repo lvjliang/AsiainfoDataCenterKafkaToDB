@@ -1,5 +1,8 @@
 package com.asiainfo.datacenter.attr;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by 董建斌 on 2018/9/26.
  */
@@ -29,17 +32,17 @@ public class OracleAttr {
      */
     public static String DELETE = "DELETE";
 
-
     //以下为可修改的常量
     public static String SSO_ERROR_TABLE = "SSOUSER_OGG.GOME_USER";
     public static String SSO_ERROR_COLUMN = "USER_ID";
     public static String SSO_CORRECT_COLUMN = "ID";
 
-
     /**
      * 需要修改的Oracle Owner名
      */
-    public static String CHANGE_OWNER = "gis_hlj";
+//    public static String CHANGE_OWNER = "UCR_CRM2:CB_UCR_CRM2";
+    public static HashMap<String, String> CHANGE_OWNER = new HashMap<String, String>();
+
 
     /**
      * 一次commit到Oracle的条数
