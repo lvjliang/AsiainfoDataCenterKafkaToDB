@@ -103,21 +103,6 @@ public class ConsumeKafka {
             StringBuilder optTableBuilder = new StringBuilder();
             optTableBuilder = new StringBuilder(optOwner + ".");
 
-//            StringBuilder optTableBuilder = new StringBuilder();
-//            switch (optOwner) {
-//                case "UCR_CRM2":
-//                    optTableBuilder = new StringBuilder("CB_UCR_CRM2.");
-//                    break;
-//                case "UCR_CEN1":
-//                    optTableBuilder = new StringBuilder("CB_UCR_CEN1.");
-//                    break;
-//                case "UCR_ACT2":
-//                    optTableBuilder = new StringBuilder("CB_UCR_ACT2.");
-//                    break;
-//                case "UCR_PARAM":
-//                    optTableBuilder = new StringBuilder("CB_UCR_PARAM.");
-//                    break;
-//            }
             String optSql = "";
 
             if (OracleParser.checkTable(oggMsg)) {
