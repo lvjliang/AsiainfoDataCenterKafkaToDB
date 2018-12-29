@@ -1,68 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Tables>
 
-	<Table type="UCR_ACT2.TS_B_BILL">
-		<col>EPARCHY_CODE,1,VARCHAR2</col>
-		<col>NET_TYPE_CODE,1,VARCHAR2</col>
-		<col>SERIAL_NUMBER,1,VARCHAR2</col>
-		<col>BILL_ID,1,NUMBER</col>
-		<col>ACCT_ID,1,NUMBER</col>
-		<col>USER_ID,1,NUMBER</col>
-		<col>PARTITION_ID,1,NUMBER</col>
-		<col>CYCLE_ID,1,NUMBER</col>
-		<col>INTEGRATE_ITEM_CODE,1,NUMBER</col>
-		<col>FEE,1,NUMBER</col>
-		<col>BALANCE,1,NUMBER</col>
-		<col>PRINT_FEE,1,NUMBER</col>
-		<col>B_DISCNT,1,NUMBER</col>
-		<col>A_DISCNT,1,NUMBER</col>
-		<col>ADJUST_BEFORE,1,NUMBER</col>
-		<col>ADJUST_AFTER,1,NUMBER</col>
-		<col>LATE_FEE,1,NUMBER</col>
-		<col>LATE_BALANCE,1,NUMBER</col>
-		<col>LATECAL_DATE,1,DATE</col>
-		<col>CANPAY_TAG,1,CHAR</col>
-		<col>PAY_TAG,1,CHAR</col>
-		<col>BILL_PAY_TAG,1,CHAR</col>
-		<col>VERSION_NO,1,NUMBER</col>
-		<col>UPDATE_TIME,1,DATE</col>
-		<col>UPDATE_DEPART_ID,1,VARCHAR2</col>
-		<col>UPDATE_STAFF_ID,1,VARCHAR2</col>
-		<col>CHARGE_ID,1,NUMBER</col>
-		<col>WRITEOFF_FEE1,1,NUMBER</col>
-		<col>WRITEOFF_FEE2,1,NUMBER</col>
-		<col>WRITEOFF_FEE3,1,NUMBER</col>
-		<col>RSRV_FEE1,1,NUMBER</col>
-		<col>RSRV_FEE2,1,NUMBER</col>
-		<col>RSRV_FEE3,1,NUMBER</col>
-		<col>RSRV_INFO1,1,VARCHAR2</col>
-		<col>RSRV_INFO2,1,VARCHAR2</col>
-		<col>DESC_OWE_TAG,1,CHAR</col>
-		<col>BACKUP_INFO,1,VARCHAR2</col>
-		<col>ROLL_BACK_INFO,1,VARCHAR2</col>
-		<col>CITY_CODE,1,VARCHAR2</col>
-		<col>PROVINCE_CODE,1,VARCHAR2</col>
-	</Table>
-
-	<Table type="UCR_ACT2.TF_B_ACCESSLOG">
-		<col>ACCESS_ID,1,NUMBER</col>
-		<col>PARTITION_ID,1,NUMBER</col>
-		<col>CHARGE_ID,0,NUMBER</col>
-		<col>ACCT_ID,0,NUMBER</col>
-		<col>ACCT_BALANCE_ID,0,NUMBER</col>
-		<col>DEPOSIT_CODE,0,NUMBER</col>
-		<col>OLD_BALANCE,0,NUMBER</col>
-		<col>MONEY,0,NUMBER</col>
-		<col>NEW_BALANCE,0,NUMBER</col>
-		<col>ACCESS_TAG,0,CHAR</col>
-		<col>OPERATE_TIME,0,DATE</col>
-		<col>EPARCHY_CODE,0,VARCHAR2</col>
-		<col>CANCEL_TAG,0,CHAR</col>
-		<col>INVOICE_FEE,0,NUMBER</col>
-		<col>PROVINCE_CODE,0,VARCHAR2</col>
-	</Table>
-
-	<Table type="UCR_ACT2.TF_O_LEAVEREALFEE">
+	<Table type="xxxx.xxxxx">
 		<col>PARTITION_ID,1,NUMBER</col>
 		<col>USER_ID,1,NUMBER</col>
 		<col>LEAVE_REAL_FEE,0,NUMBER</col>
